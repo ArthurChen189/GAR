@@ -28,8 +28,7 @@ def setup_task():
 
     # default target if not set
     if dataset is None:
-        print('dataset is not set, setting to [nq] by default!')
-        mode = 'nq'
+        print('dataset is not set, setting to [nq] by default!')dataset
     else:
         print(f'dataset=[{dataset}]')
     if mode is None:
@@ -76,7 +75,7 @@ def setup_task():
             MAX_TGT_LENGTH = 64  # 80%
         elif mode == 'answer':
             ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
-            data_path = Path(data_path) / 'trivia-answer'
+            data_path = Path(data_path) / 'trivia-answer/'
             MAX_TGT_LENGTH = 16  # 99%
         elif mode == 'sentence':
             ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
@@ -89,6 +88,50 @@ def setup_task():
             data_path = Path(data_path) / 'trivia-multi-inputs/'
         else:
             raise NotImplementedError
+
+    elif dataset == 'paq':
+        MAX_SRC_LENGTH = 50  # 95%~99%
+        if mode == 'title':
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-title/'
+            MAX_TGT_LENGTH = 64  # 80%
+        elif mode == 'answer':
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-answer/'
+            MAX_TGT_LENGTH = 40  # 99%
+        elif mode == 'sentence':
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-sentence/'
+            MAX_TGT_LENGTH = 64  # 80% ~ 95%
+        elif mode == 'multi-inputs':
+            MAX_SRC_LENGTH = 1024
+            MAX_TGT_LENGTH = 10  # 90%~95% for answers[0], 95% for value
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-multi-inputs/'
+        else:
+            raise NotImplementedError
+
+    elif dataset == 'paq-nq':
+        MAX_SRC_LENGTH = 50  # 95%~99%
+        if mode == 'title':
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-nq-title/'
+            MAX_TGT_LENGTH = 64  # 80%
+        elif mode == 'answer':
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-nq-answer/'
+            MAX_TGT_LENGTH = 40  # 99%
+        elif mode == 'sentence':
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-nq-sentence/'
+            MAX_TGT_LENGTH = 64  # 80% ~ 95%
+        elif mode == 'multi-inputs':
+            MAX_SRC_LENGTH = 1024
+            MAX_TGT_LENGTH = 10  # 90%~95% for answers[0], 95% for value
+            ckpt_name = Path(data_path) / "checkpointepoch=XXX.ckpt"
+            data_path = Path(data_path) / 'paq-nq-multi-inputs/'
+        else:
+            raise NotImplementedError  
     else:
         raise NotImplementedError
 
