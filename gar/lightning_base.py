@@ -197,8 +197,9 @@ class CheckpointEveryNSteps(pl.Callback):
             if self.use_modelcheckpoint_filename:
                 filename = trainer.checkpoint_callback.filename
             else:
-                filename = f"{self.prefix}_{epoch=}_{global_step=}.ckpt"
+                filename = f"{self.prefix}_{epoch}=_{global_step}=.ckpt"
             ckpt_path = os.path.join(trainer.checkpoint_callback.dirpath, filename)
+            print(f"Current global step is {global_step}, we are saving a checkpoint at\t{filename}")
             trainer.save_checkpoint(ckpt_path)
 
 def generic_train(model: BaseTransformer, args: argparse.Namespace, logger=True, resume_cp_file=None, ):

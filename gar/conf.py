@@ -28,7 +28,7 @@ def setup_task():
 
     # default target if not set
     if dataset is None:
-        print('dataset is not set, setting to [nq] by default!')dataset
+        print('dataset is not set, setting to [nq] by default!')
     else:
         print(f'dataset=[{dataset}]')
     if mode is None:
